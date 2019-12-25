@@ -4,30 +4,32 @@ import java.util.HashMap;
 
 public class MinimaxAlgo {
 
-    private String stateOfGame;
-    private HashMap<String, Integer> hashMap;
+    private StringBuffer stateOfGame;
+    private HashMap<Character, Integer> hashMap;
 
     public void setStateOfGame(String stateOfGame) {
-        this.stateOfGame = stateOfGame;
+        this.stateOfGame = new StringBuffer(stateOfGame);
+        setHashMap();
     }
 
     private void setHashMap() {
-        hashMap.put("X", 10);
-        hashMap.put("O", -10);
-        hashMap.put("N", 0);
+        hashMap=new HashMap<>();
+        hashMap.put('X', 10);
+        hashMap.put('O', -10);
+        hashMap.put('N', 0);
     }
 
     private char checkWinner() {
         //a 2D array consiting all winning position
         int[][] a = {
-                {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 9},
-                {1, 5, 9},
-                {3, 5, 7},
+                {0, 1, 2},
+                {3, 4, 5},
+                {6, 7, 8},
+                {0, 4, 8},
+                {2, 4, 6},
+                {0, 3, 6},
                 {1, 4, 7},
-                {2, 5, 8},
-                {3, 6, 9}
+                {2, 5, 8}
         };
         for (int i = 0; i < 8; i++) {
             if (stateOfGame.charAt(a[i][0]) == stateOfGame.charAt(a[i][1]) && stateOfGame.charAt(a[i][1]) == stateOfGame.charAt(a[i][2]))
@@ -39,25 +41,26 @@ public class MinimaxAlgo {
     }
 
     public String checkDraw() {
-        if (stateOfGame.indexOf(' ') == -1)
+        if (stateOfGame.indexOf(" ") == -1)
             return "Draw";
         return "None";
     }
 
     private int minimax(int depth, boolean isMax) {
         char winner = checkWinner();
-
         //terminal condition for minimax tree
-        if (winner != ' ')
-            return hashMap.get(winner);
+        if (winner != ' ') {
+            System.out.println(hashMap.get(winner));
+            return hashMap.get(winner)-depth;
+        }
 
         if (isMax) {
             int bestScore = -10000;
             for (int i = 0; i < stateOfGame.length(); i++) {
                 if (stateOfGame.charAt(i) == ' ') {
-                    stateOfGame = stateOfGame.substring(0, i) + "X" + stateOfGame.substring(i + 1);
+                    stateOfGame.setCharAt(i,'X');
                     int score = minimax(depth + 1, false);
-                    stateOfGame = stateOfGame.substring(0, i) + " " + stateOfGame.substring(i + 1);
+                    stateOfGame.setCharAt(i,' ');
                     bestScore = Math.max(score, bestScore);
                 }
             }
@@ -66,14 +69,31 @@ public class MinimaxAlgo {
             int bestScore = 10000;
             for (int i = 0; i < stateOfGame.length(); i++) {
                 if (stateOfGame.charAt(i) == ' ') {
-                    stateOfGame = stateOfGame.substring(0, i) + "O" + stateOfGame.substring(i + 1);
+                    stateOfGame.setCharAt(i,'O');
                     int score = minimax(depth + 1, true);
-                    stateOfGame = stateOfGame.substring(0, i) + " " + stateOfGame.substring(i + 1);
-                    bestScore = Math.max(score, bestScore);
+                    stateOfGame.setCharAt(i,' ');
+                    bestScore = Math.min(score, bestScore);
                 }
             }
             return bestScore;
         }
+    }
+
+    public void bestMove(){
+        int bestScore=-1000;
+        int moveI=0;
+        for(int i=0;i<stateOfGame.length();i++){
+            if(stateOfGame.charAt(i)==' ') {
+                stateOfGame.setCharAt(i,'X');
+                int score = minimax(0,false);
+                stateOfGame.setCharAt(i,' ');
+                if(score>bestScore){
+                    bestScore=score;
+                    moveI=i;
+                }
+            }
+        }
+        stateOfGame.setCharAt(moveI,'X');
     }
 
     @Override
