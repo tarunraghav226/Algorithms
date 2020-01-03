@@ -50,7 +50,6 @@ public class MinimaxAlgo {
         char winner = checkWinner();
         //terminal condition for minimax tree
         if (winner != ' ') {
-            System.out.println(hashMap.get(winner));
             return hashMap.get(winner)-depth;
         }
 
