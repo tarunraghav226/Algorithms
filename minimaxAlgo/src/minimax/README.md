@@ -1,4 +1,4 @@
-##MINIMAX Algorithm
+#MINIMAX Algorithm
 
 INTRODUCTION
 
