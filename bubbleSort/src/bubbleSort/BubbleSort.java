@@ -2,15 +2,15 @@ package bubbleSort;
 
 public class BubbleSort {
 
-    public <T extends Comparable> void bubbleSort(T[] arr) {
+    public static void bubbleSort(int[] arr) {
         boolean flag;
         for (int i = 0; i < arr.length - 1; i++) {
             flag = false;
             for (int j = 0; j < arr.length - 1 - i; j++) {
-                if (arr[j].compareTo(arr[j + 1]) > 0) {
-                    T temp = arr[j];
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
                     arr[j] = arr[j + 1];
-                    arr[j] = temp;
+                    arr[j + 1] = temp;
                     flag = true;
                 }
             }
