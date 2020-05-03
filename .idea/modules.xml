@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Algorithms.iml" filepath="$PROJECT_DIR$/.idea/Algorithms.iml" />
       <module fileurl="file://$PROJECT_DIR$/insertionSort/insertionSort.iml" filepath="$PROJECT_DIR$/insertionSort/insertionSort.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mergeSort/mergeSort.iml" filepath="$PROJECT_DIR$/mergeSort/mergeSort.iml" />
       <module fileurl="file://$PROJECT_DIR$/minimaxAlgo/minimaxAlgo.iml" filepath="$PROJECT_DIR$/minimaxAlgo/minimaxAlgo.iml" />
     </modules>
   </component>
